@@ -1,0 +1,198 @@
+{
+  "info": {
+    "name": "Coupon Management API",
+    "description": "Complete API collection for Coupon Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": [""]
+        },
+        "description": "Check if API is running and get endpoint information"
+      }
+    },
+    {
+      "name": "Get All Coupons",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/coupons",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons"]
+        },
+        "description": "Retrieve all coupons in the system"
+      }
+    },
+    {
+      "name": "Create Flat Discount Coupon",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"SAVE100\",\n  \"description\": \"Save 100 rupees on your order\",\n  \"discountType\": \"FLAT\",\n  \"discountValue\": 100,\n  \"maxDiscountAmount\": null,\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2025-12-31\",\n  \"usageLimitPerUser\": 1,\n  \"eligibility\": {\n    \"allowedUserTiers\": [],\n    \"minLifetimeSpend\": null,\n    \"minOrdersPlaced\": null,\n    \"firstOrderOnly\": false,\n    \"allowedCountries\": [],\n    \"minCartValue\": 500,\n    \"applicableCategories\": [],\n    \"excludedCategories\": [],\n    \"minItemsCount\": null\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/coupons",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons"]
+        },
+        "description": "Create a new flat discount coupon"
+      }
+    },
+    {
+      "name": "Create Percentage Discount Coupon",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"code\": \"FASHION20\",\n  \"description\": \"20% off on fashion items\",\n  \"discountType\": \"PERCENT\",\n  \"discountValue\": 20,\n  \"maxDiscountAmount\": 500,\n  \"startDate\": \"2024-01-01\",\n  \"endDate\": \"2025-12-31\",\n  \"usageLimitPerUser\": null,\n  \"eligibility\": {\n    \"allowedUserTiers\": [\"REGULAR\", \"GOLD\"],\n    \"minLifetimeSpend\": 2000,\n    \"minOrdersPlaced\": 2,\n    \"firstOrderOnly\": false,\n    \"allowedCountries\": [\"IN\"],\n    \"minCartValue\": 1000,\n    \"applicableCategories\": [\"fashion\"],\n    \"excludedCategories\": [],\n    \"minItemsCount\": null\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/coupons",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons"]
+        },
+        "description": "Create a percentage-based discount coupon"
+      }
+    },
+    {
+      "name": "Find Best Coupon - NEW User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userContext\": {\n    \"userId\": \"test_user_new\",\n    \"userTier\": \"NEW\",\n    \"country\": \"IN\",\n    \"lifetimeSpend\": 0,\n    \"ordersPlaced\": 0\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"productId\": \"p1\",\n        \"category\": \"electronics\",\n        \"unitPrice\": 1500,\n        \"quantity\": 1\n      },\n      {\n        \"productId\": \"p2\",\n        \"category\": \"fashion\",\n        \"unitPrice\": 500,\n        \"quantity\": 1\n      }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/coupons/best",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons", "best"]
+        },
+        "description": "Find best coupon for a new user with first order"
+      }
+    },
+    {
+      "name": "Find Best Coupon - GOLD User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userContext\": {\n    \"userId\": \"demo_user_123\",\n    \"userTier\": \"GOLD\",\n    \"country\": \"IN\",\n    \"lifetimeSpend\": 10000,\n    \"ordersPlaced\": 5\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"productId\": \"p1\",\n        \"category\": \"electronics\",\n        \"unitPrice\": 3000,\n        \"quantity\": 2\n      }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/coupons/best",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons", "best"]
+        },
+        "description": "Find best coupon for a GOLD tier user"
+      }
+    },
+    {
+      "name": "Find Best Coupon - Electronics Cart",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userContext\": {\n    \"userId\": \"u456\",\n    \"userTier\": \"REGULAR\",\n    \"country\": \"IN\",\n    \"lifetimeSpend\": 5000,\n    \"ordersPlaced\": 3\n  },\n  \"cart\": {\n    \"items\": [\n      {\n        \"productId\": \"p1\",\n        \"category\": \"electronics\",\n        \"unitPrice\": 2500,\n        \"quantity\": 1\n      }\n    ]\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/coupons/best",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons", "best"]
+        },
+        "description": "Find best coupon for electronics category"
+      }
+    },
+    {
+      "name": "Demo Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"hire-me@anshumat.org\",\n  \"password\": \"HireMe@2025!\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "auth", "login"]
+        },
+        "description": "Login with demo credentials (required for submission)"
+      }
+    },
+    {
+      "name": "Reset Usage History",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/coupons/reset-usage",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "coupons", "reset-usage"]
+        },
+        "description": "Reset usage history for testing purposes"
+      }
+    }
+  ]
+}
