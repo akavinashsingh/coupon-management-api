@@ -523,9 +523,7 @@ Make sure:
 
 ---
 
-## 📧 Contact
 
-For questions about this project, please refer to the assignment submission form.
 
 ---
 
@@ -535,5 +533,3 @@ MIT License - Free to use for educational purposes.
 
 ---
 
-**Assignment:** Coupon Management  
-**Submission Form:** [forms.gle/Bjmec4ajeJtc7697A](https://forms.gle/Bjmec4ajeJtc7697A)
