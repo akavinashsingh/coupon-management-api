@@ -335,7 +335,7 @@ app.post('/api/coupons/best', (req, res) => {
   }
 });
 
-// Reset usage history (for testing).....
+// Reset usage history (for testing).......
 app.post('/api/coupons/reset-usage', (req, res) => {
   usageHistory = {};
   res.json({
